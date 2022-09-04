@@ -11,10 +11,12 @@ struct K {
     
     struct Segue {
         static let showOnboarding = "ShowOnboarding"
+        static let showTabBarController = "ShowTabBarController"
     }
     
     struct StoryboardId {
         static let main = "Main"
         static let onboardingViewController = "OnboardingViewController"
+        static let showTabController = "ShowTabController"
     }
 }

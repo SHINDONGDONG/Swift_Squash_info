@@ -9,7 +9,12 @@ import UIKit
 
 class OnboardingViewController: UIViewController{
 
+    //MARK: - Properties
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var pageController: UIPageControl!
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -20,56 +25,72 @@ class OnboardingViewController: UIViewController{
 
     //MARK: - Configures
     func configures() {
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = .secondarySystemGroupedBackground
+//        register()
+        setupCollectionConfigre()
+        showCaption(atIndex: 0)
+ 
 }
 
+    func register() {
+        collectionView.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
+    }
+    @IBAction func startButtonAction(_ sender: Any) {
+        PresentManager.shared.show(vc: .mainTabBarController)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let index = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        showCaption(atIndex: index)
+        self.pageController.currentPage = index
+    }
+    
+    private func showCaption(atIndex index : Int) {
+        let slide = Slide.collection[index]
+        titleLabel.text = slide.title
+        descriptionLabel.text = slide.description
+    }
+    
+}
 
+    //MARK: - Extensions
+extension OnboardingViewController:UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Slide.collection.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCollectionViewCell.identifier, for: indexPath) as? OnboardingCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+//        cell.backgroundColor = indexPath.row % 2 == 0 ? .systemPink : .systemMint
+        let imageName = Slide.collection[indexPath.item].imageName
+        let image = UIImage(named: imageName ?? "") ?? UIImage()
+        cell.configure(image: image)
+        cell.backgroundColor = .secondarySystemGroupedBackground
+        return cell
+    }
 
-class ViewController1:UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemMint
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.frame.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+ //MARK: - collecion Configures
+extension OnboardingViewController {
+    func setupCollectionConfigre() {
+        let view = UICollectionViewFlowLayout()
+        view.scrollDirection = .horizontal
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .secondarySystemGroupedBackground
+        collectionView.collectionViewLayout = view
+    }
+    
+    func setupButtonConfigure(){
     }
 }
 
-class ViewController2:UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBlue
-    }
-}
-class ViewController3:UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemPink
-    }
-}
-}
-
-//extension OnboardingViewController:UIPageViewControllerDataSource {
-//
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-//        return getPre(from: viewController)
-//    }
-//
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-//        return getNext(from: viewController)
-//    }
-//    private func getPre(from viewController: UIViewController) -> UIViewController? {
-//        guard let index = pages.firstIndex(of: viewController), index - 1 >= 0 else {
-//            return nil
-//        }
-//        self.currentVC = pages[index - 1]
-//        return pages[index - 1]
-//    }
-//
-//    private func getNext(from viewController: UIViewController) -> UIViewController? {
-//        guard let index = pages.firstIndex(of: viewController), index + 1 < pages.count else {
-//            return nil
-//        }
-//        self.currentVC = pages[index + 1]
-//        return pages[index + 1]
-//    }
-//
-//
-//}

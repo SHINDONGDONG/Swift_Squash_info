@@ -27,6 +27,7 @@ class LoadingViewController: UIViewController {
 
     //MARK: - Configures
     func configures() {
+        view.backgroundColor = .secondarySystemGroupedBackground
     }
     
     private func showInitailView() {
