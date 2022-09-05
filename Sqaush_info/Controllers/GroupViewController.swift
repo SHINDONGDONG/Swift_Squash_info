@@ -25,12 +25,12 @@ class GroupViewController: UIViewController {
     ]
     
     var circleList: [Circle] = [
-        .init(id: "id1", title: "募集", description: "スカッシュをやりましょう", limit: "6", image: "https://m.media-amazon.com/images/I/514W45XB5pL.jpg"),
-        .init(id: "id2", title: "募集", description: "スカッシュをやりましょう", limit: "12", image: "https://cdn-icons-png.flaticon.com/512/3491/3491778.png"),
-        .init(id: "id3", title: "募集", description: "スカッシュをやりましょう", limit: "10", image: "https://cdn-icons-png.flaticon.com/512/3491/3491778.png"),
-        .init(id: "id4", title: "募集", description: "スカッシュをやりましょう", limit: "18", image: "https://cdn-icons-png.flaticon.com/512/2008/2008376.png"),
-        .init(id: "id5", title: "募集", description: "スカッシュをやりましょう", limit: "22", image: "https://cdn-icons-png.flaticon.com/512/2008/2008376.png"),
-        .init(id: "id6", title: "募集", description: "スカッシュをやりましょう", limit: "61", image: "https://cdn-icons-png.flaticon.com/512/2008/2008376.png"),
+        .init(id: "id1", title: "０６スカッシュ", description: "スカッシュをやりましょう", limit: "6", image: "https://m.media-amazon.com/images/I/514W45XB5pL.jpg"),
+        .init(id: "id2", title: "すかやろ", description: "スカッシュをやりましょう", limit: "12", image: "https://cdn-icons-png.flaticon.com/512/3491/3491778.png"),
+        .init(id: "id3", title: "レモンスカッシュ", description: "スカッシュをやりましょう", limit: "10", image: "https://cdn-icons-png.flaticon.com/512/3491/3491778.png"),
+        .init(id: "id4", title: "恵比寿", description: "スカッシュをやりましょう", limit: "18", image: "https://cdn-icons-png.flaticon.com/512/2008/2008376.png"),
+        .init(id: "id5", title: "タック", description: "スカッシュをやりましょう", limit: "22", image: "https://cdn-icons-png.flaticon.com/512/2008/2008376.png"),
+        .init(id: "id6", title: "広尾集まり", description: "スカッシュをやりましょう", limit: "61", image: "https://cdn-icons-png.flaticon.com/512/2008/2008376.png"),
     ]
     
     var coachList: [Coach] = [
